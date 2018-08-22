@@ -1,5 +1,12 @@
 # fluent-plugin-factor
 
+## Requirements
+
+| fluent-plugin-factor | fluentd    |
+|----------------------|------------|
+| >= 1.0.0             | >= v0.14.0 |
+| <  1.0.0             | <  v0.14.0 |
+
 ## Installation
 ```
 gem install fluent-plugin-factor
