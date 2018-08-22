@@ -1,13 +1,11 @@
-require "fluent/input"
-require "fluent/time"
-require "fluent/timezone"
+require "fluent/plugin/input"
 require "fluent/config/error"
 require "facter"
 require "json"
 
-module Fluent
+module Fluent::Plugin
   class FactorInput < Input
-    Plugin.register_input('factor', self)
+    Fluent::Plugin.register_input('factor', self)
 
     config_param :tag, :string
     config_param :run_interval, :time, default: nil
@@ -94,9 +92,9 @@ module Fluent
         @factors.each do |factor, enabled|
           record[factor] = send(factor) if enabled
         end
-        router.emit(@tag, Engine.now, record)
+        router.emit(@tag, Fluent::EventTime.now, record)
       rescue => e
-        router.emit_error_event(@tag, Engine.now, record, e)
+        router.emit_error_event(@tag, Fluent::EventTime.now, record, e)
       end
     end
 

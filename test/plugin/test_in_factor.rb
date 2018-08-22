@@ -10,12 +10,12 @@ class FactorInputTest < Test::Unit::TestCase
   }
 
   def create_driver(conf = CONFIG)
-    Fluent::Test::InputTestDriver.new(Fluent::FactorInput).configure(conf)
+    Fluent::Test::Driver::Input.new(Fluent::Plugin::FactorInput).configure(conf)
   end
 
   def test_emit
     d = create_driver
     d.run
-    p d.emits
+    p d.events
   end
 end
